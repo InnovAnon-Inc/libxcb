@@ -6,7 +6,8 @@ COPY --from=innovanon/libxdmcp    /tmp/libXdmcp.txz    /tmp/
 COPY --from=innovanon/xcb-proto   /tmp/xcbproto.txz    /tmp/
 RUN cat   /tmp/*.txz  \
   | tar Jxf - -i -C / \
- && rm -v /tmp/*.txz
+ && rm -v /tmp/*.txz  \
+ && ldconfig
 
 ARG LFS=/mnt/lfs
 WORKDIR $LFS/sources
@@ -21,6 +22,7 @@ RUN sleep 31                                                                    
  && make DESTDIR=/tmp/libxcb install                                                   \
  && rm -rf                                                                  libxcb     \
  && cd           /tmp/libxcb                                                           \
+ && strip.sh .                                                                         \
  && tar acf        ../libxcb.txz .                                                     \
  && cd ..                                                                              \
  && rm -rf       /tmp/libxcb
