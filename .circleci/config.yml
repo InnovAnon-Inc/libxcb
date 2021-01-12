@@ -42,7 +42,8 @@ jobs:
               curl --location --request POST \
                 'https://circleci.com/api/v2/project/github/InnovAnon-Inc/freetype/pipeline' \
                 --header 'Content-Type: application/json' \
-                -u "${FREETYPE_API_TOKEN}:"
+                --data '{"branch":"master"}' \
+                -u "${API_TOKEN}:"
             fi
 
 #      - run:
@@ -52,7 +53,8 @@ jobs:
 #              curl --location --request POST \
 #                'https://circleci.com/api/v2/project/github/InnovAnon-Inc/xorg-libs/pipeline' \
 #                --header 'Content-Type: application/json' \
-#                -u "${XORG_LIBS_API_TOKEN}:"
+#                --data '{"branch":"master"}' \
+#                -u "${API_TOKEN}:"
 #            fi
 #
 
