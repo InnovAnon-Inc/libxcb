@@ -36,13 +36,23 @@ jobs:
               docker push innovanon/libxcb
             fi
       - run:
-          name: Push upstream (xorg-libs)
+          name: Push upstream (freetype)
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               curl --location --request POST \
-                'https://circleci.com/api/v2/project/github/InnovAnon-Inc/xorg-libs/pipeline' \
+                'https://circleci.com/api/v2/project/github/InnovAnon-Inc/freetype/pipeline' \
                 --header 'Content-Type: application/json' \
-                -u "${XORG_LIBS_API_TOKEN}:"
+                -u "${FREETYPE_API_TOKEN}:"
             fi
 
+#      - run:
+#          name: Push upstream (xorg-libs)
+#          command: |
+#            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+#              curl --location --request POST \
+#                'https://circleci.com/api/v2/project/github/InnovAnon-Inc/xorg-libs/pipeline' \
+#                --header 'Content-Type: application/json' \
+#                -u "${XORG_LIBS_API_TOKEN}:"
+#            fi
+#
 
