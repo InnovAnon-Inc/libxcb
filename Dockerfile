@@ -15,7 +15,9 @@ RUN sleep 31                                                                    
  && git clone --depth=1 --recursive https://gitlab.freedesktop.org/xorg/lib/libxcb.git \
  && cd                                                                      libxcb     \
  && ./autogen.sh                                                                       \
- && ./configure $XORG_CONFIG                                                           \
+ && CFLAGS=-Wno-error=format-extra-args ./configure $XORG_CONFIG                       \
+      --without-doxygen                                                                \
+ && make                                                                               \
  && make DESTDIR=/tmp/libxcb install                                                   \
  && rm -rf                                                                  libxcb     \
  && cd           /tmp/libxcb                                                           \
