@@ -4,10 +4,7 @@ COPY --from=innovanon/xorgproto   /tmp/xorgproto.txz   /tmp/
 COPY --from=innovanon/libxau      /tmp/libXau.txz      /tmp/
 COPY --from=innovanon/libxdmcp    /tmp/libXdmcp.txz    /tmp/
 COPY --from=innovanon/xcb-proto   /tmp/xcbproto.txz    /tmp/
-RUN cat   /tmp/*.txz  \
-  | tar Jxf - -i -C / \
- && rm -v /tmp/*.txz  \
- && ldconfig
+RUN extract.sh
 
 ARG LFS=/mnt/lfs
 WORKDIR $LFS/sources
@@ -26,4 +23,7 @@ RUN sleep 31                                                                    
  && tar acf        ../libxcb.txz .                                                     \
  && cd ..                                                                              \
  && rm -rf       /tmp/libxcb
+
+FROM scratch as final
+COPY --from=builder-01 /tmp/libxcb.txz /tmp/
 
